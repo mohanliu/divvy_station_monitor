@@ -284,4 +284,4 @@ def update_lastday_timeseries(clickData, value):
     return create_time_series(df.iloc[-288:], value, 'orange', 'lines', 'Last 24 Hours (<i>per 5 mins</i>)', "Station "+stid)
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
