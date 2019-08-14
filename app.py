@@ -55,7 +55,7 @@ colors = {
     'text': '#7FDBFF'
 }
 
-stationdata = pd.read_csv('station.csv')
+stationdata = pd.read_csv('data/station.csv')
 
 app.layout = html.Div(style={'backgroundColor': colors['background'], "height" : "100vh", 'width': '100vw'}, children=[
     html.H1(
