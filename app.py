@@ -17,36 +17,60 @@ def to_dataframe(raw):
 external_stylesheets = ['static/css/bWLwgP.css']
 external_scripts = []
 
-app = dash.Dash(__name__, 
-    external_stylesheets=external_stylesheets,
-    external_scripts=external_scripts,
-    meta_tags=[
-        # A description of the app, used by e.g.
-        # search engines when displaying search results.
-        {
-            'name': 'Divvy Station Monitor',
-            'content': 'Divvy Station Monitor'
-        },
-        # A tag that tells Internet Explorer (IE)
-        # to use the latest renderer version available
-        # to that browser (e.g. Edge)
-        {
-            'http-equiv': 'X-UA-Compatible',
-            'content': 'IE=edge'
-        },
-        # A tag that tells the browser not to scale
-        # desktop widths to fit mobile screens.
-        # Sets the width of the viewport (browser)
-        # to the width of the device, and the zoom level
-        # (initial scale) to 1.
-        #
-        # Necessary for "true" mobile support.
-        {
-          'name': 'viewport',
-          'content': 'width=device-width, initial-scale=1.0'
-        }
-    ]
-)
+class CustomDash(dash.Dash):
+    def interpolate_index(self, verbose=False, **kwargs):
+        # Inspect the arguments by printing them
+        if verbose:
+            print(kwargs)
+
+        return '''
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <title>DivvyStationMonitor</title>
+            </head>
+            <body bgcolor='#111111'>
+                {app_entry}
+                {config}
+                {scripts}
+                {renderer}
+            </body>
+        </html>
+        '''.format(
+            app_entry=kwargs['app_entry'],
+            config=kwargs['config'],
+            scripts=kwargs['scripts'],
+            renderer=kwargs['renderer'])
+
+app = CustomDash(external_stylesheets=external_stylesheets,
+                external_scripts=external_scripts,
+                meta_tags=[
+                        # A description of the app, used by e.g.
+                        # search engines when displaying search results.
+                        {
+                            'name': 'Divvy Station Monitor',
+                            'content': 'Divvy Station Monitor'
+                        },
+                        # A tag that tells Internet Explorer (IE)
+                        # to use the latest renderer version available
+                        # to that browser (e.g. Edge)
+                        {
+                            'http-equiv': 'X-UA-Compatible',
+                            'content': 'IE=edge'
+                        },
+                        # A tag that tells the browser not to scale
+                        # desktop widths to fit mobile screens.
+                        # Sets the width of the viewport (browser)
+                        # to the width of the device, and the zoom level
+                        # (initial scale) to 1.
+                        #
+                        # Necessary for "true" mobile support.
+                        {
+                          'name': 'viewport',
+                          'content': 'width=device-width, initial-scale=1.0'
+                        }
+                    ]
+            )
 
 server = app.server
 
@@ -58,13 +82,29 @@ colors = {
 stationdata = pd.read_csv('data/station.csv')
 
 app.layout = html.Div(style={'backgroundColor': colors['background'], "height" : "100vh", 'width': '100vw'}, children=[
-    html.H1(
-        'Divvy Station Monitor',
-        style={
-            'textAlign': 'center',
-            'color': colors['text'],
-            'width': '100vw'
-        }),
+    html.Div(
+            [  
+                html.P("Divvy Station Monitor", 
+                        style={
+                        'textAlign': 'center',
+                        'font-size': 30,
+                        'font-weight': 600,
+                        'color': colors['text'],
+                        'width': '95%',
+                        'display': 'inline-block',
+                        'margin-bottom': '0px',
+                        'padding-bottom': '0px',
+                        'margin-top': '5px',
+                    }),
+                html.A('About', href='https://plot.ly', target="_blank", 
+                    style={
+                        'width': '5%', 
+                        'display': 'inline-block',
+                        'color': 'white',
+                        'font-style': 'italic',
+                        }),
+            ],
+        ),
     html.Div([
         dcc.Graph(
             id='crossfilter-indicator-scatter',
@@ -284,4 +324,4 @@ def update_lastday_timeseries(clickData, value):
     return create_time_series(df.iloc[-288:], value, 'orange', 'lines', 'Last 24 Hours (<i>per 5 mins</i>)', "Station "+stid)
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
