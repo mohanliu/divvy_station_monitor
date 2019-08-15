@@ -5,7 +5,9 @@ import requests, json, os
 import pandas as pd
 from plotly import graph_objects as go
 import numpy as np
+import flask
 
+STATIC_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
 QUERY_FUNC = os.environ.get('divvy_cloud_function')
 mapbox_access_token = os.environ.get('mapbox_token')
 
@@ -42,7 +44,8 @@ class CustomDash(dash.Dash):
             scripts=kwargs['scripts'],
             renderer=kwargs['renderer'])
 
-app = CustomDash(external_stylesheets=external_stylesheets,
+app = CustomDash(
+                external_stylesheets=external_stylesheets,
                 external_scripts=external_scripts,
                 meta_tags=[
                         # A description of the app, used by e.g.
@@ -74,6 +77,8 @@ app = CustomDash(external_stylesheets=external_stylesheets,
 
 server = app.server
 
+# app.scripts.config.serve_locally = True
+
 colors = {
     'background': '#111111',
     'text': '#7FDBFF'
@@ -96,7 +101,9 @@ app.layout = html.Div(style={'backgroundColor': colors['background'], "height" :
                         'padding-bottom': '0px',
                         'margin-top': '5px',
                     }),
-                html.A('About', href='static/html/about.html', target="_blank", 
+                html.A('About', 
+                    href="/about", 
+                    target="_blank", 
                     style={
                         'width': '5%', 
                         'display': 'inline-block',
@@ -322,6 +329,10 @@ def update_lastday_timeseries(clickData, value):
     reslst = requests.post(QUERY_FUNC, json={'stationid':stid}).content.decode('utf-8')
     df = to_dataframe(reslst)
     return create_time_series(df.iloc[-288:], value, 'orange', 'lines', 'Last 24 Hours (<i>per 5 mins</i>)', "Station "+stid)
+
+@app.server.route("/about")
+def get_report():
+    return flask.send_from_directory(STATIC_PATH, "html/about.html")
 
 if __name__ == '__main__':
     app.run_server(debug=True)
