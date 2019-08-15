@@ -334,5 +334,11 @@ def update_lastday_timeseries(clickData, value):
 def get_report():
     return flask.send_from_directory(STATIC_PATH, "html/about.html")
 
+
+@app.server.route('{}<image_path>'.format('/static/'))
+def serve_image(image_path):
+    image_name = '{}'.format(image_path)
+    return flask.send_from_directory(STATIC_PATH, "img/"+image_name)
+
 if __name__ == '__main__':
     app.run_server(debug=True)
