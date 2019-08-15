@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Work Flow</title>
+    <title>Workflow</title>
     <style>
     html, body {
       width: 100%;
@@ -11,7 +11,7 @@
       border: 0;
       overflow: hidden; /*  Disable scrollbars */
       display: block;  /* No floating content on sides */
-      background-color: #e1e1e1;
+      background-color: #000000;
     }
     </style>
 </head>
@@ -19,13 +19,13 @@
 <body>
 	<div>
 		<p style="font-size: 25px; 
-				 text-align: right;
-				 margin-right: 5%;
+				 text-align: left;
+				 margin-left: 2%;
 				 margin-top: 1%">
-		<a target="_blank" href='https://divvy-exploration.herokuapp.com' style="padding-right: 2%"><i>Intro</i></a>
-		<a target="_blank" href='https://divvystationmonitor.herokuapp.com' style="padding-right: 2%"><i>Monitor</i></a>
-		<a target="_blank" href='https://github.com/mohanliu/divvy_station_monitor' style="padding-right: 2%"><i>Source Code</i></a>
-		<a target="_blank" href='https://mohanliu.github.io'><i>Contact</i></a>
+		<a target="_blank" href='https://divvy-exploration.herokuapp.com' style="padding-right: 1%; color:white"><i>Intro</i></a>
+<!-- 		<a target="_blank" href='https://divvystationmonitor.herokuapp.com' style="padding-right: 2%; color:white"><i>Monitor</i></a> -->
+		<a target="_blank" href='https://github.com/mohanliu/divvy_station_monitor' style="padding-right: 1%; color:white"><i>Source Code</i></a>
+		<a target="_blank" href='https://mohanliu.github.io' style="color:white"><i>Contact</i></a>
 		</p>
 	</div>
     <canvas id='c' style='position:absolute; left:0px; top:7%;'>
@@ -40,7 +40,21 @@
         // Obtain a graphics context on the canvas element for drawing.
         context = htmlCanvas.getContext('2d');
 
-       // Start listening to resize events and draw canvas.
+       // Define line height
+       var lineHeight=0.03*window.innerHeight;
+
+       // Define link info
+	   var linkX1=0.04*window.innerWidth;
+	   var linkY1=0.66*window.innerHeight;
+	   var linkWidthlink1;
+	   var inLink1 = false;
+
+	   var linkX2=0.79*window.innerWidth;
+	   var linkY2=0.12*window.innerHeight;
+	   var linkWidthlink2;
+	   var inLink2 = false;
+
+	   // Start listening to resize events and draw canvas.
        initialize();
 
        function initialize() {
@@ -58,7 +72,7 @@
             var winwidth = window.innerWidth;
 			var img1 = new Image();
 			img1.onload = function() {
-			    context.drawImage(img1, 0.42*window.innerWidth, 0.34*window.innerHeight, 0.15*winwidth, 0.15*winwidth);
+			    context.drawImage(img1, 0.4*window.innerWidth, 0.31*window.innerHeight, 0.19*winwidth, 0.19*winwidth);
 			}
 			img1.src = "/static/database.svg";
 
@@ -71,9 +85,9 @@
 
 			var img3 = new Image();
 			img3.onload = function() {
-			    context.drawImage(img3, 0.05*window.innerWidth, 0.55*window.innerHeight, 0.125*winwidth, 0.04*winwidth);
+			    context.drawImage(img3, 0.03*window.innerWidth, 0.53*window.innerHeight, 0.15*winwidth, 0.05*winwidth);
 			}
-			img3.src = "/static/Divvy_Logo_svg.png";
+			img3.src = "/static/DivvyLogos3.png";
 
 			var img4 = new Image();
 			img4.onload = function() {
@@ -93,25 +107,35 @@
 			}
 			img6.src = "/static/clock.svg";
 
-
-			// context.font = "25px Comic Sans MS";
-			// context.fillStyle = "blue";
-			// context.textAlign = "center";
-			// context.fillText("Cloud Function", 0.28*window.innerWidth, 0.37*window.innerHeight);
-
-			// context.fillStyle = "blue";
-			// context.textAlign = "center";
-			// context.fillText("Cloud Function", 0.68*window.innerWidth, 0.78*window.innerHeight);
-
-			// context.fillStyle = "blue";
-			// context.textAlign = "center";
-			// context.fillText("Cloud PostgreSQL", 0.48*window.innerWidth, 0.65*window.innerHeight);
-
-			context.strokeStyle = "rgba(0, 0, 200, 0.1)";
-			context.fillStyle = "rgba(0, 0, 200, 0.1)";
+			// Background for GCP
+			context.strokeStyle = "rgba(200, 200, 200, 0.9)";
+			context.fillStyle = "rgba(250, 250, 250, 0.9)";
 			roundRect(context, 0.20*window.innerWidth, 0.05*window.innerHeight, 0.565*window.innerWidth, 
-					 0.8*window.innerHeight, 20, true, true);
+					 0.8*window.innerHeight, 100, true, true);
 
+
+			context.font = lineHeight + "px Comic Sans MS";
+			context.fillStyle = "white";
+			context.fillText("Live Station Info", linkX1, linkY1);
+    		linkWidthlink1=context.measureText("Live Station Info").width;
+			
+			context.font = lineHeight + "px Comic Sans MS";
+			context.fillStyle = "white";
+			context.fillText("Divvy Station Monitor", linkX2, linkY2);
+			linkWidthlink2=context.measureText("Divvy Station Monitor").width;
+
+			context.font = "22px Comic Sans MS";
+			context.fillStyle = "blue";
+			context.textAlign = "center";
+			context.fillText("Cloud Function", 0.28*window.innerWidth, 0.13*window.innerHeight);
+			context.fillText("Cloud Function", 0.68*window.innerWidth, 0.77*window.innerHeight);
+			context.fillText("Cloud Scheduler", 0.56*window.innerWidth, 0.20*window.innerHeight);
+
+
+			htmlCanvas.addEventListener("mousemove", CanvasMouseMove, false);
+            htmlCanvas.addEventListener("click", Link_Click, false);
+
+			// Divvy to cloud function
        	    drawCurvedArrow(
 	        	htmlCanvas.width*0.1, 
 	        	htmlCanvas.height*0.5,
@@ -120,20 +144,22 @@
 	                winwidth*0.1, htmlCanvas.height*0.3,
 	                20, // arrowWidth, try 30 for example !
 	                35, // w
-	                "rgba(100, 0, 230, 0.8)"
+	                "rgba(255, 255, 0, 0.9)"
 	                );
 
+       	    // cloud function 1 to cloud sql
        	    drawCurvedArrow(
 	        	htmlCanvas.width*0.28, 
 	        	htmlCanvas.height*0.38,
 	            htmlCanvas.width*0.4,
-	            htmlCanvas.height*0.49,
-	                winwidth*0.3, htmlCanvas.height*0.48,
+	            htmlCanvas.height*0.59,
+	                winwidth*0.3, htmlCanvas.height*0.6,
 	                20, // arrowWidth, try 30 for example !
 	                35, // w
-	                "rgba(100, 0, 230, 0.3)"
+	                "rgba(0, 0, 255, 0.6)"
 	                );
 
+       	    // cloud schedular to cloud function 1
        	    drawCurvedArrow(
 	        	htmlCanvas.width*0.44, 
 	        	htmlCanvas.height*0.15,
@@ -142,21 +168,22 @@
 	                winwidth*0.44, htmlCanvas.height*0.15,
 	                15, // arrowWidth, try 30 for example !
 	                25, // w
-	                "rgba(100, 0, 230, 0.3)"
+	                "rgba(0, 0, 255, 0.6)"
 	                );
 
-
+       	    // cloud sql to cloud function 2
        	    drawCurvedArrow(
-	        	htmlCanvas.width*0.51, 
-	        	htmlCanvas.height*0.4,
-	            htmlCanvas.width*0.65,
+	        	htmlCanvas.width*0.54, 
+	        	htmlCanvas.height*0.35,
+	            htmlCanvas.width*0.67,
 	            htmlCanvas.height*0.5,
-	                winwidth*0.6, htmlCanvas.height*0.35,
+	                winwidth*0.67, htmlCanvas.height*0.3,
 	                20, // arrowWidth, try 30 for example !
 	                35, // w
-	                "rgba(100, 0, 230, 0.3)"
+	                "rgba(0, 0, 255, 0.6)"
 	                );
 
+       	    // cloud function 2 to monitor
        	    drawCurvedArrow(
 	        	htmlCanvas.width*0.78, 
 	        	htmlCanvas.height*0.65,
@@ -165,7 +192,7 @@
 	                winwidth*0.86, htmlCanvas.height*0.6,
 	                20, // arrowWidth, try 30 for example !
 	                35, // w
-	                "rgba(100, 0, 230, 0.8)"
+	                "rgba(255, 0, 0, 0.9)"
 	                );
 
         }
@@ -247,6 +274,46 @@
 			    ctx.stroke();
 			  }
 		}
+
+
+		//check if the mouse is over the link and change cursor style
+		function CanvasMouseMove (ev) {
+		  var x, y;
+
+		  // Get the mouse position relative to the canvas element.
+		  if (ev.layerX || ev.layerX == 0) { //for firefox
+		    x = ev.layerX;
+		    y = ev.layerY;
+		  }
+		  x-=htmlCanvas.offsetLeft;
+		  y-=htmlCanvas.offsetTop;
+
+		  //is the mouse over the link?
+		  if(x>=linkX1 && x <= (linkX1 + linkWidthlink1) && y<=(linkY1 - lineHeight) && y>= (linkY1 - 7* lineHeight)){
+		      document.body.style.cursor = "pointer";
+		      inLink1=true;
+		  }
+		  else if(x>=linkX2 && x <= (linkX2 + linkWidthlink2) && y<=(linkY2 + 2 * lineHeight) && y>= (linkY2 - 4* lineHeight)){
+		      document.body.style.cursor = "pointer";
+		      inLink2=true;
+		  }
+		  else{
+		      document.body.style.cursor = "";
+		      inLink1=false;
+		      inLink2=false;
+		  }
+		}
+
+		//if the link has been clicked, go to link
+		function Link_Click(e) {
+		  if (inLink1)  {
+		    window.open("https://gbfs.divvybikes.com/gbfs/gbfs.json");
+		  }
+		  if (inLink2)  {
+		    window.open("https://divvystationmonitor.herokuapp.com/");
+		  }
+		}
+
     })
     ();
 
