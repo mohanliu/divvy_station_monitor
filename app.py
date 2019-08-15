@@ -96,7 +96,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background'], "height" :
                         'padding-bottom': '0px',
                         'margin-top': '5px',
                     }),
-                html.A('About', href='https://plot.ly', target="_blank", 
+                html.A('About', href='static/html/about.html', target="_blank", 
                     style={
                         'width': '5%', 
                         'display': 'inline-block',
