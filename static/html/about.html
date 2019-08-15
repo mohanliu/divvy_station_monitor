@@ -55,53 +55,43 @@
         // Display custom canvas. In this case it's a blue, 5 pixel 
         // border that resizes along with the browser window.
         function redraw() {
-            // context.strokeStyle = 'blue';
-            // context.lineWidth = '25';
-            // context.strokeRect(0, 0, window.innerWidth, window.innerHeight);
-
             var winwidth = window.innerWidth;
 			var img1 = new Image();
 			img1.onload = function() {
 			    context.drawImage(img1, 0.42*window.innerWidth, 0.34*window.innerHeight, 0.15*winwidth, 0.15*winwidth);
 			}
-			// context.drawImage(img, 0, 0);
-			img1.src = "../img/database.svg";
+			img1.src = "/img/database.svg";
 
 			var img2 = new Image();
 			img2.onload = function() {
 			    context.drawImage(img2, 0.22*window.innerWidth, 0.15*window.innerHeight, 0.125*winwidth, 0.102*winwidth);
 			    context.drawImage(img2, 0.62*window.innerWidth, 0.55*window.innerHeight, 0.125*winwidth, 0.102*winwidth);
 			}
-			// context.drawImage(img, 0, 0);
-			img2.src = "../img/cloudfunction.png";
+			img2.src = "/static/img/cloudfunction.png";
 
 			var img3 = new Image();
 			img3.onload = function() {
 			    context.drawImage(img3, 0.05*window.innerWidth, 0.55*window.innerHeight, 0.125*winwidth, 0.04*winwidth);
 			}
-			// context.drawImage(img, 0, 0);
-			img3.src = "../img/Divvy_Logo_svg.png";
+			img3.src = "/static/img/Divvy_Logo_svg.png";
 
 			var img4 = new Image();
 			img4.onload = function() {
 			    context.drawImage(img4, 0.8*window.innerWidth, 0.15*window.innerHeight, 0.125*winwidth, 0.125*winwidth);
 			}
-			// context.drawImage(img, 0, 0);
-			img4.src = "../img/home.svg";
+			img4.src = "/static/img/home.svg";
 
 			var img5 = new Image();
 			img5.onload = function() {
 			    context.drawImage(img5, 0.21*window.innerWidth, 0.63*window.innerHeight, 0.19*winwidth, 0.12*winwidth);
 			}
-			// context.drawImage(img, 0, 0);
-			img5.src = "../img/gcp.png";
+			img5.src = "/static/img/gcp.png";
 
 			var img6 = new Image();
 			img6.onload = function() {
 			    context.drawImage(img6, 0.45*window.innerWidth, 0.08*window.innerHeight, 0.06*winwidth, 0.06*winwidth);
 			}
-			// context.drawImage(img, 0, 0);
-			img6.src = "../img/clock.svg";
+			img6.src = "clock.svg";
 
 
 			// context.font = "25px Comic Sans MS";
