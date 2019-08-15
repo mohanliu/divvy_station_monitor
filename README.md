@@ -6,9 +6,9 @@ _A real-time monitor of the Divvy Stations in Chicago._
 [Divvy](https://www.divvybikes.com/) is Chicago's bike share system, with 580 stations and 5,800 bikes across Chicagoland. It’s a fun, affordable and convenient way to get around. 
 
 ## Divvy Station Status Monitor
-Live station info on each Divvy station can be accessed throught Divvy [GBFS JSON Feed](https://gbfs.divvybikes.com/gbfs/gbfs.json).
+Live station info can be accessed throught Divvy [GBFS JSON Feed](https://gbfs.divvybikes.com/gbfs/gbfs.json).
 
-To visualize the trend of station info, we provide a live [**Divvy Station Monitor**](https://divvystationmonitor.herokuapp.com) with station status for the past week. 
+To visualize the trend of station info, we provide a live [**Divvy Station Monitor**](https://divvystationmonitor.herokuapp.com) with status of each Divvy station during the past week. 
 
 [![Alt text](/static/img/snapshot.png?raw=true "Optional Title")](https://divvystationmonitor.herokuapp.com)
 
