@@ -8,7 +8,8 @@ _A real-time monitor of the Divvy Stations in Chicago._
 ## Divvy Station Status Monitor
 Live station info on each Divvy station can be accessed throught Divvy [GBFS JSON Feed](https://gbfs.divvybikes.com/gbfs/gbfs.json).
 
-To visualize the trend of station info 
+To visualize the trend of station info, we provide a live Divvy Station Monitor with station status for the past week. 
+
 [![Alt text](/static/img/snapshot.png?raw=true "Optional Title")](https://divvystationmonitor.herokuapp.com)
 
 ## Data Infrastructure
