@@ -19,5 +19,7 @@ These data can be further used to perform time-series analysis and forecasting.
 
 [![Work Flow](/static/img/wf.png?raw=true "Optional Title")](https://divvystationmonitor.herokuapp.com/about)
 
+## Additional Information
+A machine-learning project on [Divvy historical trip data](https://www.divvybikes.com/system-data) can be found [here](https://divvy-exploration.herokuapp.com/).
 
 (*Desktop View Only. Google Chrome is recommended.*)
