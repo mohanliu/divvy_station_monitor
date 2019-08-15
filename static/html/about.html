@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Work Flow</title>
+    <style>
+    html, body {
+      width: 100%;
+      height: 95%;
+      margin: 0px;
+      border: 0;
+      overflow: hidden; /*  Disable scrollbars */
+      display: block;  /* No floating content on sides */
+      background-color: #e1e1e1;
+    }
+    </style>
+</head>
+
+<body>
+	<div>
+		<p style="font-size: 25px; 
+				 text-align: right;
+				 margin-right: 5%;
+				 margin-top: 1%">
+		<a target="_blank" href='https://divvy-exploration.herokuapp.com' style="padding-right: 2%"><i>Intro</i></a>
+		<a target="_blank" href='https://divvystationmonitor.herokuapp.com' style="padding-right: 2%"><i>Monitor</i></a>
+		<a target="_blank" href='https://github.com/mohanliu/divvy_station_monitor' style="padding-right: 2%"><i>Source Code</i></a>
+		<a target="_blank" href='https://mohanliu.github.io'><i>Contact</i></a>
+		</p>
+	</div>
+    <canvas id='c' style='position:absolute; left:0px; top:7%;'>
+    </canvas>
+
+
+    <script>
+    (function() {
+        var
+        // Obtain a reference to the canvas element using its id.
+        htmlCanvas = document.getElementById('c'),
+        // Obtain a graphics context on the canvas element for drawing.
+        context = htmlCanvas.getContext('2d');
+
+       // Start listening to resize events and draw canvas.
+       initialize();
+
+       function initialize() {
+           // Register an event listener to call the resizeCanvas() function 
+           // each time the window is resized.
+           window.addEventListener('resize', resizeCanvas, false);
+           // Draw canvas border for the first time.
+           resizeCanvas();
+
+    	}
+
+        // Display custom canvas. In this case it's a blue, 5 pixel 
+        // border that resizes along with the browser window.
+        function redraw() {
+            // context.strokeStyle = 'blue';
+            // context.lineWidth = '25';
+            // context.strokeRect(0, 0, window.innerWidth, window.innerHeight);
+
+            var winwidth = window.innerWidth;
+			var img1 = new Image();
+			img1.onload = function() {
+			    context.drawImage(img1, 0.42*window.innerWidth, 0.34*window.innerHeight, 0.15*winwidth, 0.15*winwidth);
+			}
+			// context.drawImage(img, 0, 0);
+			img1.src = "../img/database.svg";
+
+			var img2 = new Image();
+			img2.onload = function() {
+			    context.drawImage(img2, 0.22*window.innerWidth, 0.15*window.innerHeight, 0.125*winwidth, 0.102*winwidth);
+			    context.drawImage(img2, 0.62*window.innerWidth, 0.55*window.innerHeight, 0.125*winwidth, 0.102*winwidth);
+			}
+			// context.drawImage(img, 0, 0);
+			img2.src = "../img/cloudfunction.png";
+
+			var img3 = new Image();
+			img3.onload = function() {
+			    context.drawImage(img3, 0.05*window.innerWidth, 0.55*window.innerHeight, 0.125*winwidth, 0.04*winwidth);
+			}
+			// context.drawImage(img, 0, 0);
+			img3.src = "../img/Divvy_Logo_svg.png";
+
+			var img4 = new Image();
+			img4.onload = function() {
+			    context.drawImage(img4, 0.8*window.innerWidth, 0.15*window.innerHeight, 0.125*winwidth, 0.125*winwidth);
+			}
+			// context.drawImage(img, 0, 0);
+			img4.src = "../img/home.svg";
+
+			var img5 = new Image();
+			img5.onload = function() {
+			    context.drawImage(img5, 0.21*window.innerWidth, 0.63*window.innerHeight, 0.19*winwidth, 0.12*winwidth);
+			}
+			// context.drawImage(img, 0, 0);
+			img5.src = "../img/gcp.png";
+
+			var img6 = new Image();
+			img6.onload = function() {
+			    context.drawImage(img6, 0.45*window.innerWidth, 0.08*window.innerHeight, 0.06*winwidth, 0.06*winwidth);
+			}
+			// context.drawImage(img, 0, 0);
+			img6.src = "../img/clock.svg";
+
+
+			// context.font = "25px Comic Sans MS";
+			// context.fillStyle = "blue";
+			// context.textAlign = "center";
+			// context.fillText("Cloud Function", 0.28*window.innerWidth, 0.37*window.innerHeight);
+
+			// context.fillStyle = "blue";
+			// context.textAlign = "center";
+			// context.fillText("Cloud Function", 0.68*window.innerWidth, 0.78*window.innerHeight);
+
+			// context.fillStyle = "blue";
+			// context.textAlign = "center";
+			// context.fillText("Cloud PostgreSQL", 0.48*window.innerWidth, 0.65*window.innerHeight);
+
+			context.strokeStyle = "rgba(0, 0, 200, 0.1)";
+			context.fillStyle = "rgba(0, 0, 200, 0.1)";
+			roundRect(context, 0.20*window.innerWidth, 0.05*window.innerHeight, 0.565*window.innerWidth, 
+					 0.8*window.innerHeight, 20, true, true);
+
+       	    drawCurvedArrow(
+	        	htmlCanvas.width*0.1, 
+	        	htmlCanvas.height*0.5,
+	            htmlCanvas.width*0.18,
+	            htmlCanvas.height*0.25,
+	                winwidth*0.1, htmlCanvas.height*0.3,
+	                20, // arrowWidth, try 30 for example !
+	                35, // w
+	                "rgba(100, 0, 230, 0.8)"
+	                );
+
+       	    drawCurvedArrow(
+	        	htmlCanvas.width*0.28, 
+	        	htmlCanvas.height*0.38,
+	            htmlCanvas.width*0.4,
+	            htmlCanvas.height*0.49,
+	                winwidth*0.3, htmlCanvas.height*0.48,
+	                20, // arrowWidth, try 30 for example !
+	                35, // w
+	                "rgba(100, 0, 230, 0.3)"
+	                );
+
+       	    drawCurvedArrow(
+	        	htmlCanvas.width*0.44, 
+	        	htmlCanvas.height*0.15,
+	            htmlCanvas.width*0.36,
+	            htmlCanvas.height*0.22,
+	                winwidth*0.44, htmlCanvas.height*0.15,
+	                15, // arrowWidth, try 30 for example !
+	                25, // w
+	                "rgba(100, 0, 230, 0.3)"
+	                );
+
+
+       	    drawCurvedArrow(
+	        	htmlCanvas.width*0.51, 
+	        	htmlCanvas.height*0.4,
+	            htmlCanvas.width*0.65,
+	            htmlCanvas.height*0.5,
+	                winwidth*0.6, htmlCanvas.height*0.35,
+	                20, // arrowWidth, try 30 for example !
+	                35, // w
+	                "rgba(100, 0, 230, 0.3)"
+	                );
+
+       	    drawCurvedArrow(
+	        	htmlCanvas.width*0.78, 
+	        	htmlCanvas.height*0.65,
+	            htmlCanvas.width*0.86,
+	            htmlCanvas.height*0.4,
+	                winwidth*0.86, htmlCanvas.height*0.6,
+	                20, // arrowWidth, try 30 for example !
+	                35, // w
+	                "rgba(100, 0, 230, 0.8)"
+	                );
+
+        }
+
+        // Runs each time the DOM window resize event fires.
+        // Resets the canvas dimensions to match window,
+        // then draws the new borders accordingly.
+        function resizeCanvas() {
+            htmlCanvas.width = window.innerWidth;
+            htmlCanvas.height = window.innerHeight;
+            redraw();
+        }
+
+        function drawCurvedArrow(startPointX, startPointY,
+                         endPointX, endPointY,
+                         quadPointX, quadPointY,
+                         lineWidth,
+                         arrowWidth, 
+                         color) {
+		  // GOOD PRACTICE: the function changes color and lineWidth -> save context!
+		  context.strokeStyle = color;
+		  context.lineWidth = lineWidth;
+
+		  // angle of the end tangeant, useful for drawing the arrow head
+		  var arrowAngle = Math.atan2(quadPointX - endPointX, quadPointY - endPointY) + Math.PI;
+
+		  // start a new path
+		  context.beginPath();
+		  context.moveTo(startPointX, startPointY);
+
+		  context.quadraticCurveTo(quadPointX, quadPointY, endPointX, endPointY);
+
+		  context.moveTo(endPointX - (arrowWidth * Math.sin(arrowAngle - Math.PI / 6)), 
+		             endPointY - (arrowWidth * Math.cos(arrowAngle - Math.PI / 6)));
+
+		  context.lineTo(endPointX, endPointY);
+
+		  context.lineTo(endPointX - (arrowWidth * Math.sin(arrowAngle + Math.PI / 6)), 
+		             endPointY - (arrowWidth * Math.cos(arrowAngle + Math.PI / 6)));
+
+		  context.stroke();
+		  // context.closePath();
+		  
+		  // // GOOD PRACTICE -> restore the context as we saved it at the beginning
+		  // // of the function
+		  // ctx.restore();
+		}
+
+		function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+			  if (typeof stroke == 'undefined') {
+			    stroke = true;
+			  }
+			  if (typeof radius === 'undefined') {
+			    radius = 5;
+			  }
+			  if (typeof radius === 'number') {
+			    radius = {tl: radius, tr: radius, br: radius, bl: radius};
+			  } else {
+			    var defaultRadius = {tl: 0, tr: 0, br: 0, bl: 0};
+			    for (var side in defaultRadius) {
+			      radius[side] = radius[side] || defaultRadius[side];
+			    }
+			  }
+			  ctx.beginPath();
+			  ctx.moveTo(x + radius.tl, y);
+			  ctx.lineTo(x + width - radius.tr, y);
+			  ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+			  ctx.lineTo(x + width, y + height - radius.br);
+			  ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+			  ctx.lineTo(x + radius.bl, y + height);
+			  ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+			  ctx.lineTo(x, y + radius.tl);
+			  ctx.quadraticCurveTo(x, y, x + radius.tl, y);
+			  ctx.closePath();
+			  if (fill) {
+			    ctx.fill();
+			  }
+			  if (stroke) {
+			    ctx.stroke();
+			  }
+		}
+    })
+    ();
+
+    </script>
+</body> 
+</html>
