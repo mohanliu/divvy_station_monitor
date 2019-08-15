@@ -36,7 +36,7 @@
     (function() {
         var
         // Obtain a reference to the canvas element using its id.
-        htmlCanvas = document.getElementById('c'),
+        htmlCanvas = document.getElementById('c');
         // Obtain a graphics context on the canvas element for drawing.
         context = htmlCanvas.getContext('2d');
 
@@ -60,38 +60,38 @@
 			img1.onload = function() {
 			    context.drawImage(img1, 0.42*window.innerWidth, 0.34*window.innerHeight, 0.15*winwidth, 0.15*winwidth);
 			}
-			img1.src = "/img/database.svg";
+			img1.src = "/static/database.svg";
 
 			var img2 = new Image();
 			img2.onload = function() {
 			    context.drawImage(img2, 0.22*window.innerWidth, 0.15*window.innerHeight, 0.125*winwidth, 0.102*winwidth);
 			    context.drawImage(img2, 0.62*window.innerWidth, 0.55*window.innerHeight, 0.125*winwidth, 0.102*winwidth);
 			}
-			img2.src = "/static/img/cloudfunction.png";
+			img2.src = "/static/cloudfunction.png";
 
 			var img3 = new Image();
 			img3.onload = function() {
 			    context.drawImage(img3, 0.05*window.innerWidth, 0.55*window.innerHeight, 0.125*winwidth, 0.04*winwidth);
 			}
-			img3.src = "/static/img/Divvy_Logo_svg.png";
+			img3.src = "/static/Divvy_Logo_svg.png";
 
 			var img4 = new Image();
 			img4.onload = function() {
 			    context.drawImage(img4, 0.8*window.innerWidth, 0.15*window.innerHeight, 0.125*winwidth, 0.125*winwidth);
 			}
-			img4.src = "/static/img/home.svg";
+			img4.src = "/static/home.svg";
 
 			var img5 = new Image();
 			img5.onload = function() {
 			    context.drawImage(img5, 0.21*window.innerWidth, 0.63*window.innerHeight, 0.19*winwidth, 0.12*winwidth);
 			}
-			img5.src = "/static/img/gcp.png";
+			img5.src = "/static/gcp.png";
 
 			var img6 = new Image();
 			img6.onload = function() {
 			    context.drawImage(img6, 0.45*window.innerWidth, 0.08*window.innerHeight, 0.06*winwidth, 0.06*winwidth);
 			}
-			img6.src = "clock.svg";
+			img6.src = "/static/clock.svg";
 
 
 			// context.font = "25px Comic Sans MS";
