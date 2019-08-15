@@ -108,8 +108,8 @@
 			img6.src = "/static/clock.svg";
 
 			// Background for GCP
-			context.strokeStyle = "rgba(200, 200, 200, 0.9)";
-			context.fillStyle = "rgba(250, 250, 250, 0.9)";
+			context.strokeStyle = "#E2E2E2";
+			context.fillStyle = "#E2E2E2";
 			roundRect(context, 0.20*window.innerWidth, 0.05*window.innerHeight, 0.565*window.innerWidth, 
 					 0.8*window.innerHeight, 100, true, true);
 
@@ -125,7 +125,7 @@
 			linkWidthlink2=context.measureText("Divvy Station Monitor").width;
 
 			context.font = "22px Comic Sans MS";
-			context.fillStyle = "blue";
+			context.fillStyle = "#508EF3";
 			context.textAlign = "center";
 			context.fillText("Cloud Function", 0.28*window.innerWidth, 0.13*window.innerHeight);
 			context.fillText("Cloud Function", 0.68*window.innerWidth, 0.77*window.innerHeight);
@@ -144,7 +144,7 @@
 	                winwidth*0.1, htmlCanvas.height*0.3,
 	                20, // arrowWidth, try 30 for example !
 	                35, // w
-	                "rgba(255, 255, 0, 0.9)"
+	                "#FBBD13"
 	                );
 
        	    // cloud function 1 to cloud sql
@@ -156,7 +156,7 @@
 	                winwidth*0.3, htmlCanvas.height*0.6,
 	                20, // arrowWidth, try 30 for example !
 	                35, // w
-	                "rgba(0, 0, 255, 0.6)"
+	                "#508EF3"
 	                );
 
        	    // cloud schedular to cloud function 1
@@ -168,7 +168,7 @@
 	                winwidth*0.44, htmlCanvas.height*0.15,
 	                15, // arrowWidth, try 30 for example !
 	                25, // w
-	                "rgba(0, 0, 255, 0.6)"
+	                "#508EF3"
 	                );
 
        	    // cloud sql to cloud function 2
@@ -180,7 +180,7 @@
 	                winwidth*0.67, htmlCanvas.height*0.3,
 	                20, // arrowWidth, try 30 for example !
 	                35, // w
-	                "rgba(0, 0, 255, 0.6)"
+	                "#508EF3"
 	                );
 
        	    // cloud function 2 to monitor
@@ -192,7 +192,7 @@
 	                winwidth*0.86, htmlCanvas.height*0.6,
 	                20, // arrowWidth, try 30 for example !
 	                35, // w
-	                "rgba(255, 0, 0, 0.9)"
+	                "#EA4538"
 	                );
 
         }
