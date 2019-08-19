@@ -13,7 +13,7 @@ To visualize the trend of station info, we provide a live [**Divvy Station Monit
 [![Alt text](/static/img/snapshot.png?raw=true "Divvy Station Monitor")](https://divvystationmonitor.herokuapp.com)
 
 ## Data Infrastructure
-The infrastructure is constructed on [Google Cloud Platform](https://cloud.google.com/). A Cloud PostgreSOL is used to store the real-time station info data. The detailed work flow can be view below.
+The infrastructure is constructed on [Google Cloud Platform](https://cloud.google.com/). A Cloud PostgreSQL is used to store the real-time station info data. The detailed work flow can be view below.
 
 These data can be further used to perform time-series analysis and forecasting.
 
